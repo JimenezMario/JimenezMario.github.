@@ -1,23 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/stylos.css">
-  <title>Formulario Registro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saludo</title>
+    <link href="css/estilos.css" rel="stylesheet">
+    <script type="modile" src="cmp/mi-footer.js"></script>
 </head>
 <body>
-  <section class="form-register">
-    <h4>Formulario Registro</h4>
-    <input class="controls" type="text" name="nombres" id="nombres" placeholder="Ingrese su Nombre">
-    <input class="controls" type="text" name="apellidos" id="apellidos" placeholder="Ingrese su Apellido">
-    <input class="controls" type="email" name="correo" id="correo" placeholder="Ingrese su Correo">
-    <input class="controls" type="password" name="correo" id="correo" placeholder="Ingrese su Contraseña">
-    <p>Estoy de acuerdo con <a href="#">Terminos y Condiciones</a></p>
-    <input class="botons" type="submit" value="Registrar">
-    <p><a href="#">¿Ya tengo Cuenta?</a></p>
-  </section>
-
-</body>
-</html
+    <form id="formSaludo">
+        <h1>Saludos</h1>
+        <p>
+            <label>
+                Nombre
+                <input type="text" name="nombre">
+            </label>
+        </p>
+        <p><button>Saludar</button></p>
+        <p><output name="salida"></output></p>
+    </form>
+    <mi-footer></mi-footer>
+    <script type="module">
+    import{CtrlSaludo} from "/js/CtrlSaludo.js";
+    const ctrlSaludo = new CtrlSaludo();
+    formSaludo.addEventListener("submit", evt => {
+        try{
+            evt.preventDefault();
+            const datos = new FormData(formSaludo);
+            const nombre = datos.get("nombre");
+            const saludo = ctrlSaludo.calculaSaludo(nombre);
+            formSaludo.salida.value = saludo;
+        }catch(error){
+            console.log(error);
+            formSaludo.salida.value = error.message;
+        }
+    });
+    </script>
+    <footer>Copyright &copy; 2021 Edgar Alejandro Ortiz Trejo</footer>
+  </body>
+</html>
